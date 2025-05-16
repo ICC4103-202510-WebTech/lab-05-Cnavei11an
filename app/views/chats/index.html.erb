@@ -10,6 +10,8 @@
       <td><%= chat.sender_id %></td>
       <td><%= chat.receiver_id %></td>
       <td><%= link_to "View", chat_path(chat.id) %></td>
+      <td><%= link_to "Edit", edit_chat_path(chat) %></td>
+
     </tr>
   <% end %>
 </table>

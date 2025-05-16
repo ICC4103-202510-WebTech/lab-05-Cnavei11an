@@ -1,0 +1,20 @@
+<h1>Edit Chat</h1>
+
+<%= form_with model: @chat do |f| %>
+  <% if @chat.errors.any? %>
+    <ul>
+      <% @chat.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <p>
+    <%= f.label :sender_id %><br>
+    <%= f.number_field :sender_id %>
+  </p>
+  <p>
+    <%= f.label :receiver_id %><br>
+    <%= f.number_field :receiver_id %>
+  </p>
+  <p><%= f.submit "Update Chat" %></p>
+<% end %>

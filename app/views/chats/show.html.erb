@@ -1,4 +1,17 @@
 <h1>Chat <%= @chat.id %></h1>
-<p>Sender: <%= @chat.sender_id %></p>
-<p>Receiver: </strong> <%= @chat.receiver_id %></p>
-<p><%= link_to "Back to chats", "/chats" %></p>
+
+<p><strong>Sender:</strong> <%= @chat.sender.first_name %> <%= @chat.sender.last_name %></p>
+<p><strong>Receiver:</strong> <%= @chat.receiver.first_name %> <%= @chat.receiver.last_name %></p>
+
+<h2>Messages</h2>
+<ul>
+  <% @chat.messages.each do |message| %>
+    <li>
+      <strong><%= message.user.first_name %>:</strong> <%= message.body %> -
+      <%= link_to "View", message_path(message) %>
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to "Back to chats", chats_path %></p>
+<p><%= link_to "Edit chat", edit_chat_path(@chat) %></p>
