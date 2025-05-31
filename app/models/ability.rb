@@ -1,0 +1,15 @@
+class Ability
+  include CanCan::Ability
+
+  def initialize(user)
+    return unless user.present?
+
+    can :read, :all
+
+    can :create, Message
+    can [:update, :destroy], Chat, sender_id: user.id
+
+    can :create, Chat
+    can [:update, :destroy, :edit], Chat, user_id: user.id
+  end
+end

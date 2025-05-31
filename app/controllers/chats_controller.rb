@@ -1,4 +1,6 @@
 class ChatsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
   def index
     @chats = Chat.all
   end
@@ -13,8 +15,10 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new(chat_params)
+    @chat.sender_id = current_user.id
+    # también puedes asignar @chat.receiver_id si es necesario
     if @chat.save
-      redirect_to chats_path
+      redirect_to @chat, notice: "Chat creado con éxito."
     else
       render :new
     end
