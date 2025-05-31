@@ -10,6 +10,6 @@ class Ability
     can [:update, :destroy], Chat, sender_id: user.id
 
     can :create, Chat
-    can [:update, :destroy, :edit], Chat, user_id: user.id
+    can [:update, :destroy], Chat, sender_id: user.id
   end
 end
