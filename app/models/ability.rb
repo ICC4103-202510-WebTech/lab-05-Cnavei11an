@@ -3,10 +3,14 @@ class Ability
 
   def initialize(user)
     # Si no hay usuario logueado, no puede hacer nada (o solo leer lo público)
-    return unless user.present?
+    return unless user
 
     # Permitir leer todo (para cualquier usuario logueado)
-    can :read, :all
+    can :read, Chat do |chat|
+      chat.sender_id   == user.id ||
+      chat.receiver_id == user.id
+    end
+    can :read, User, id: user.id
 
     # Mensajes
     # Cualquier usuario puede crear mensajes

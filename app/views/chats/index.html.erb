@@ -1,18 +1,25 @@
-<h1>Chats</h1>
+<h1>My Inbox</h1>
 
-<table>
-  <tr>
-    <th>ID</th><th>Sender ID</th><th>Receiver ID</th><th>Actions</th>
-  </tr>
-  <% @chats.each do |chat| %>
+<table class="table">
+  <thead>
     <tr>
-      <td><%= chat.id %></td>
-      <td><%= chat.sender_id %></td>
-      <td><%= chat.receiver_id %></td>
-      <td><%= link_to "View", chat_path(chat.id) %></td>
-      <td><%= link_to "Edit", edit_chat_path(chat) %></td>
-
+      <th>Conversation with</th>
+      <th>View</th>
     </tr>
-  <% end %>
+  </thead>
+
+  <tbody>
+    <% @chats.each do |chat| %>
+      <tr>
+        <td>
+          <%= chat.other_participant(current_user).first_name %>
+          <%= chat.other_participant(current_user).last_name %>
+        </td>
+        
+        <td>
+          <%= link_to "View", chat_path(chat), class: "btn btn-sm btn-info" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-<%= link_to "new chat", new_chat_path %>
